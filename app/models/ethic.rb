@@ -1,0 +1,2 @@
+class Ethic < ApplicationRecord
+end
