@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_01_02_031536) do
     t.string "name"
     t.string "icon"
     t.string "effects"
+    t.string "type"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
