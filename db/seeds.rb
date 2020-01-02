@@ -152,3 +152,11 @@ Ethic.create!(
   category: 'gestalt',
   description: "We reach into the void.\nThe vast expanse becomes us."
 )
+
+p 'creating civics'
+Civic.create!(
+  name: 'Agrarian Idyll',
+  icon: 'https://stellaris.paradoxwikis.com/images/thumb/1/1f/Civic_agrarian_idyll.png/50px-Civic_agrarian_idyll.png',
+  effects: '+1 housing from Generator, Mining and Agriculture districts, −1 housing from City Districts, Farmers also produce +2 amenities, Cannnot pick Arcology Project ascension perk',
+  description: 'A simple and peaceful life can often be the most rewarding. This agrarian society has, to a large extent, managed to avoid large-scale urbanization.'
+)
