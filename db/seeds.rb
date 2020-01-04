@@ -225,4 +225,85 @@ civics_array.each do |civic|
   )
 end
 
+p 'preparing to create traits'
+
+url = 'https://stellaris.paradoxwikis.com/Traits'
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+tables = html_doc.search('.mildtable tbody')
+def traits_table_scraper(table, slice_size)
+  scraped_array = []
+  table.search('td').each_with_index.map do |element, i|
+    lithoid_restriction = element.children.attribute('alt')
+    icon_src = element.children.children.attribute('src')
+    if lithoid_restriction
+      'x'
+    elsif (i % slice_size).zero?
+      icon_src.value + ', ' + element.text.strip
+    elsif icon_src && element.text.strip.empty?
+      icon_src.value
+    else
+      element.text.strip
+    end
+  end.each_slice(slice_size) { |slice| scraped_array << slice }
+  scraped_array
+end
+
+p 'creating standard and biological traits'
+traits = traits_table_scraper(tables.first, 7)
+# => ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\n Nonadaptive\n Robust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]
+traits.each do |trait|
+  Trait.create!(
+    name: trait.first.split(', ').second,
+    icon: 'https://stellaris.paradoxwikis.com' + trait.first.split(', ').first,
+    effects: trait.second,
+    value: trait.fifth.to_i,
+    description: trait.seventh,
+    type: trait.fourth.empty? ? 'standard' : 'biological',
+    category: (trait.third.split("\n ") << trait.first).sort.join(' - ')
+  )
+end
+
+p 'creating hive minded trait'
+Trait.create!(
+  name: 'Hive-Minded',
+  icon: 'https://stellaris.paradoxwikis.com/images/thumb/7/7d/Hive-minded.png/29px-Hive-minded.png',
+  effects: 'Not Affected by Happiness',
+  value: 0,
+  description: 'This species is made up of semi-autonomous individuals slaved to a single, unfathomably vast consciousness.',
+  type: 'biological'
+)
+
+p 'creating lithoid traits'
+traits = traits_table_scraper(tables[1], 6)
+# => ["/images/9/9f/Trait_lithoid.png, Lithoid", "Pop growth Speed -25%\n Habitability +50%\n Army Health +50%\n Leader Lifespan +50\nConsumes  Minerals instead of  Food", "", "0", "0", "This species has a silicon based biology, and consumes minerals rather than food. They are tougher than traditional organics and have slower metabolisms, making them long lived but slow to reproduce."]
+traits.each do |trait|
+  Trait.create!(
+    name: trait.first.split(', ').second,
+    icon: 'https://stellaris.paradoxwikis.com' + trait.first.split(', ').first,
+    effects: trait.second,
+    value: trait.fourth.to_i,
+    description: trait.sixth,
+    type: 'lithoid',
+    category: (trait.third.split("\n ") << trait.first).sort.join(' - ')
+  )
+end
+
+p 'creating robotic traits'
+traits = traits_table_scraper(tables.last, 7)
+# => ["/images/c/c2/Domestic_protocols.png, Domestic Protocols", "2", "", "x", "Can be employed in Servant Jobs if under AI Servitude\n Amenities from Jobs +20%", "Robot", "Specialized equipment and behavior protocols for all conceivable domestic needs. Full functionality guaranteed.(Has no effect on Synthetics with Citizenship Rights.)"]
+traits.each do |trait|
+  if trait.fourth.empty?
+    Trait.create!(
+      name: trait.first.split(', ').second,
+      icon: 'https://stellaris.paradoxwikis.com' + trait.first.split(', ').first,
+      effects: trait.fifth,
+      value: trait.second.to_i,
+      description: trait.seventh,
+      type: 'robotic',
+      category: (trait.sixth.split("\n ") << trait.first).sort.join(' - ')
+    )
+  end
+end
+
 p 'done'
