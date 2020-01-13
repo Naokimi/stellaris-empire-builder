@@ -1,7 +1,7 @@
 require 'open-uri'
 
-class ScrapersController < ApplicationController
-  def self.civics_scraper(tables_index, slice_size)
+class ScraperService
+  def civics_scraper(tables_index, slice_size)
     tables = tables_scraper('https://stellaris.paradoxwikis.com/Civics')
     scraped_array = []
     tables[tables_index].search('td').map do |element|
@@ -11,7 +11,7 @@ class ScrapersController < ApplicationController
     scraped_array
   end
 
-  def self.traits_scraper(tables_index, slice_size)
+  def traits_scraper(tables_index, slice_size)
     tables = tables_scraper('https://stellaris.paradoxwikis.com/Traits')
     scraped_array = []
     tables[tables_index].search('td').each_with_index.map do |element, i|
@@ -32,7 +32,7 @@ class ScrapersController < ApplicationController
 
   private
 
-  def self.tables_scraper(url)
+  def tables_scraper(url)
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
     html_doc.search('.mildtable tbody')

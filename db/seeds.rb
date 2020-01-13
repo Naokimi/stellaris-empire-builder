@@ -154,7 +154,7 @@ Ethic.create!(
 
 p 'creating Standard civics'
 
-civics_array = ScrapersController.civics_scraper(0, 6)
+civics_array = ScraperService.new.civics_scraper(0, 6)
 # => ["/images/thumb/1/1f/Civic_agrarian_idyll.png/50px-Civic_agrarian_idyll.png", "Agrarian Idyll", "+1 housing from Generator, Mining and Agriculture districts\n −1 housing from City Districts\n Farmers also produce  +2 amenities\n Cannnot pick  Arcology Project ascension perk", "Pacifist\n Syncretic Evolution\n Slaver Guilds\n Post-Apocalyptic", "A simple and peaceful life can often be the most rewarding. This agrarian society has, to a large extent, managed to avoid large-scale urbanization.", ""]
 civics_array.each do |civic|
   Civic.create!(
@@ -168,7 +168,7 @@ end
 
 p 'creating Corporate civics'
 
-civics_array = ScrapersController.civics_scraper(2, 4)
+civics_array = ScraperService.new.civics_scraper(2, 4)
 # => ["/images/5/5d/Civic_brand_loyalty.png", "Brand Loyalty", "+15% Monthly Unity", "This Megacorporation has fostered a great sense of brand loyalty among its internal consumer base.  Its catchy corporate slogans can be recited by nearly everyone."]
 civics_array.each do |civic|
   Civic.create!(
@@ -182,7 +182,7 @@ end
 
 p 'creating Hive Mind civics'
 
-civics_array = ScrapersController.civics_scraper(3, 4)
+civics_array = ScraperService.new.civics_scraper(3, 4)
 # => ["/images/thumb/4/42/Civic_ascetic.png/50px-Civic_ascetic.png", "Ascetic", "−15% Pop Amenities Usage", "The Hive Mind cares little for material comforts."]
 civics_array.each do |civic|
   Civic.create!(
@@ -196,7 +196,7 @@ end
 
 p 'creating Machine Intelligence civics'
 
-civics_array = ScrapersController.civics_scraper(4, 4)
+civics_array = ScraperService.new.civics_scraper(4, 4)
 # => ["/images/thumb/d/d3/Civic_machine_builder.png/50px-Civic_machine_builder.png", "Constructobot", "−10% Building and District cost\n −10% Building and District upkeep", "Responsible for organizing all planetary construction since its inception, the Machine Intelligence executes efficiently on all manner of facility construction projects."]
 civics_array.each do |civic|
   Civic.create!(
@@ -209,7 +209,7 @@ civics_array.each do |civic|
 end
 
 p 'creating standard and biological traits'
-traits = ScrapersController.traits_scraper(0, 7)
+traits = ScraperService.new.traits_scraper(0, 7)
 # => ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\n Nonadaptive\n Robust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]
 traits.each do |trait|
   Trait.create!(
@@ -234,7 +234,7 @@ Trait.create!(
 )
 
 p 'creating lithoid traits'
-traits = ScrapersController.traits_scraper(1, 6)
+traits = ScraperService.new.traits_scraper(1, 6)
 # => ["/images/9/9f/Trait_lithoid.png, Lithoid", "Pop growth Speed -25%\n Habitability +50%\n Army Health +50%\n Leader Lifespan +50\nConsumes  Minerals instead of  Food", "", "0", "0", "This species has a silicon based biology, and consumes minerals rather than food. They are tougher than traditional organics and have slower metabolisms, making them long lived but slow to reproduce."]
 traits.each do |trait|
   Trait.create!(
@@ -249,7 +249,7 @@ traits.each do |trait|
 end
 
 p 'creating robotic traits'
-traits = ScrapersController.traits_scraper(-1, 7)
+traits = ScraperService.new.traits_scraper(-1, 7)
 # => ["/images/c/c2/Domestic_protocols.png, Domestic Protocols", "2", "", "x", "Can be employed in Servant Jobs if under AI Servitude\n Amenities from Jobs +20%", "Robot", "Specialized equipment and behavior protocols for all conceivable domestic needs. Full functionality guaranteed.(Has no effect on Synthetics with Citizenship Rights.)"]
 traits.each do |trait|
   if trait.fourth.empty?
