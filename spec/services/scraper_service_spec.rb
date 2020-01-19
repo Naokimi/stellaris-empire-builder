@@ -2,16 +2,15 @@ require 'rails_helper'
 
 RSpec.describe ScraperService do
   context 'Ethics' do
-    # it 'scrapes Fanatic Authoritarians' do
-    #   result = ["/images/thumb/1/10/Fanatic_Authoritarian.png/42px-Fanatic_Authoritarian.png, Fanatic Authoritarian, Authoritarian - Egalitarian", "+1 Monthly Influence\n +10% Worker Output", "Must have  Autocratic authority\nAllows Stratified Economy Living Standards\nCan Enslave aliens", "A single voice, a single throne, a single state. It is the solemn duty of the masses to obey those enlightened few who have been charged with the great responsibility of leadership."]
-    #   scraped_array = ScraperService.new.ethics_scraper
-    #   expect(scraped_array.first).to eq(result)
-    # end
-    # it 'scraped Gestalt Consciousness' do
-    #   result = ["/images/thumb/d/d3/Gestalt_consciousness.png/42px-Gestalt_consciousness.png, Gestalt Consciousness, Gestalt Consciousness", "-20% War Exhaustion Gain\n +1 Monthly Influence", "Cannot use any  default authority\nCan use the Full Orbital Bombardment policy\nRulers are Immortal\nNative Pops are not affected by happiness and will not join Factions\nNative Pops cannot survive in empires with a different authority\nNon-native Pops cannot survive in Gestalt Consciousness empires\nCan use the  No Retreat War Doctrine", "We reach into the void.The vast expanse becomes us."]
-    #   scraped_array = ScraperService.new.ethics_scraper
-    #   expect(scraped_array.last).to eq(result)
-    # end
+    scraped_array = ScraperService.new.ethics_scraper
+    it 'scrapes Fanatic Authoritarians' do
+      result = ["/images/thumb/1/10/Fanatic_Authoritarian.png/42px-Fanatic_Authoritarian.png, Fanatic Authoritarian, Authoritarian - Egalitarian", "+1 Monthly Influence\n +10% Worker Output", "Must have  Autocratic authority\nAllows Stratified Economy Living Standards\nCan Enslave aliens", "A single voice, a single throne, a single state. It is the solemn duty of the masses to obey those enlightened few who have been charged with the great responsibility of leadership."]
+      expect(scraped_array.first).to eq(result)
+    end
+    it 'scraped Gestalt Consciousness' do
+      result = ["/images/thumb/d/d3/Gestalt_consciousness.png/42px-Gestalt_consciousness.png, Gestalt Consciousness, Gestalt Consciousness", "-20% War Exhaustion Gain\n +1 Monthly Influence", "Cannot use any  default authority\nCan use the Full Orbital Bombardment policy\nRulers are Immortal\nNative Pops are not affected by happiness and will not join Factions\nNative Pops cannot survive in empires with a different authority\nNon-native Pops cannot survive in Gestalt Consciousness empires\nCan use the  No Retreat War Doctrine", "We reach into the void.The vast expanse becomes us."]
+      expect(scraped_array.last).to eq(result)
+    end
   end
 
   context 'Civics' do

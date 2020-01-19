@@ -9,7 +9,7 @@ class ScraperService
     last_gestalt_index = 67
     sanitized_range = 0..-7
 
-    mapped_headlines = default_scraper(url, 'h3̈́', document).map do |element|
+    mapped_headlines = default_scraper(url, 'h3', document).map do |element|
       element.text.strip[sanitized_range]
     end
     mapped_tables = tables.search('td').each_with_index.map do |element, i|
