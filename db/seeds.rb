@@ -9,16 +9,25 @@ wiki_url = 'https://stellaris.paradoxwikis.com'
 
 p 'creating ethics'
 
-ethics_array = ScraperService.new.ethics_scraper(0, 4)
-# => ["/images/thumb/1/10/Fanatic_Authoritarian.png/42px-Fanatic_Authoritarian.png, Fanatic Authoritarian", "+1 Monthly Influence\n +10% Worker Output", "Must have  Autocratic authority\nAllows Stratified Economy Living Standards\nCan Enslave aliens", "A single voice, a single throne, a single state. It is the solemn duty of the masses to obey those enlightened few who have been charged with the great responsibility of leadership."]
+ethics_array = ScraperService.new.ethics_scraper
+# => ["/images/thumb/1/10/Fanatic_Authoritarian.png/42px-Fanatic_Authoritarian.png, Fanatic Authoritarian, Authoritarian - Egalitarian", "+1 Monthly Influence\n +10% Worker Output", "Must have  Autocratic authority\nAllows Stratified Economy Living Standards\nCan Enslave aliens", "A single voice, a single throne, a single state. It is the solemn duty of the masses to obey those enlightened few who have been charged with the great responsibility of leadership."]
 ethics_array.each do |ethic|
-  Civic.create!(
-    name: ethic.first.split(', ').second,
+  ethic_name = ethic.first.split(', ').second
+  ethic_value = case ethic_name
+                when include?('Gestalt')
+                  3
+                when include?('Fanatic')
+                  2
+                else
+                  1
+                end
+  Ethic.create!(
+    name: ethic_name,
     icon: wiki_url + ethic.first.split(', ').first,
-    value: ethic.first.split(', ').second.include?('Fanatic') ? 2 : 1,
+    value: ethic_value,
     effects: civic.second,
     description: civic.third,
-    category: 'hierarchy'
+    category: ethic.first.split(', ').third
   )
 end
 

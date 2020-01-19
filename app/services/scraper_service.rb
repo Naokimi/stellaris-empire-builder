@@ -2,25 +2,26 @@ require 'open-uri'
 
 class ScraperService
   def ethics_scraper
-    # tables = tables_scraper('https://stellaris.paradoxwikis.com/Ethics')
-    # scraped_array = []
-    # tables[tables_index].search('td').each_with_index.map do |element, i|
-    #   icon_src = element.children.children.children.attribute('src')
-    #   if (i % slice_size).zero?
-    #     icon_src.value + ', ' + element.text.strip
-    #   elsif icon_src && element.text.strip.empty?
-    #     icon_src.value
-    #   else
-    #     element.text.strip
-    #   end
-    # end.each_slice(slice_size) { |slice| scraped_array << slice }
-    # scraped_array
     url = 'https://stellaris.paradoxwikis.com/Ethics'
     document = html_doc(url)
     tables = tables_scraper(document)
     scraped_array = []
-    # iterate through all the tables, map with index and create a array of ethics arrays
-    # don't forget to add to the array the h3 name [0..-7] to use for category
+    last_gestalt_index = 67
+    sanitized_range = 0..-7
+    mapped_headlines = default_scraper(url, 'h3̈́', document).map do |element|
+      element.text.strip[sanitized_range]
+    end
+    mapped_tables = tables.search('td').each_with_index.map do |element, i|
+      icon_src = element.children.children.children.attribute('src')
+      if i > last_gestalt_index
+        nil
+      elsif (i % 4).zero?
+        icon_src.value + ', ' + element.text.strip + ', ' + mapped_headlines[i / 16]
+      else
+        element.text.strip
+      end
+    end
+    mapped_tables.compact.each_slice(4) { |slice| scraped_array << slice }
     scraped_array
   end
 
