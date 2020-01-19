@@ -4,10 +4,11 @@ class ScraperService
   def ethics_scraper
     url = 'https://stellaris.paradoxwikis.com/Ethics'
     document = html_doc(url)
-    tables = tables_scraper(document)
+    tables = tables_scraper(url, document)
     scraped_array = []
     last_gestalt_index = 67
     sanitized_range = 0..-7
+
     mapped_headlines = default_scraper(url, 'h3̈́', document).map do |element|
       element.text.strip[sanitized_range]
     end

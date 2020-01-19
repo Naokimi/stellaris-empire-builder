@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe ScraperService do
+  context 'Ethics' do
+    # it 'scrapes Fanatic Authoritarians' do
+    #   result = ["/images/thumb/1/10/Fanatic_Authoritarian.png/42px-Fanatic_Authoritarian.png, Fanatic Authoritarian, Authoritarian - Egalitarian", "+1 Monthly Influence\n +10% Worker Output", "Must have  Autocratic authority\nAllows Stratified Economy Living Standards\nCan Enslave aliens", "A single voice, a single throne, a single state. It is the solemn duty of the masses to obey those enlightened few who have been charged with the great responsibility of leadership."]
+    #   scraped_array = ScraperService.new.ethics_scraper
+    #   expect(scraped_array.first).to eq(result)
+    # end
+    # it 'scraped Gestalt Consciousness' do
+    #   result = ["/images/thumb/d/d3/Gestalt_consciousness.png/42px-Gestalt_consciousness.png, Gestalt Consciousness, Gestalt Consciousness", "-20% War Exhaustion Gain\n +1 Monthly Influence", "Cannot use any  default authority\nCan use the Full Orbital Bombardment policy\nRulers are Immortal\nNative Pops are not affected by happiness and will not join Factions\nNative Pops cannot survive in empires with a different authority\nNon-native Pops cannot survive in Gestalt Consciousness empires\nCan use the  No Retreat War Doctrine", "We reach into the void.The vast expanse becomes us."]
+    #   scraped_array = ScraperService.new.ethics_scraper
+    #   expect(scraped_array.last).to eq(result)
+    # end
+  end
+
   context 'Civics' do
     it 'scrapes standard' do
       result = ["/images/thumb/1/1f/Civic_agrarian_idyll.png/50px-Civic_agrarian_idyll.png", "Agrarian Idyll", "+1 housing from Generator, Mining and Agriculture districts\n −1 housing from City Districts\n Farmers also produce  +2 amenities\n Cannnot pick  Arcology Project ascension perk", "Pacifist\n Syncretic Evolution\n Slaver Guilds\n Post-Apocalyptic", "A simple and peaceful life can often be the most rewarding. This agrarian society has, to a large extent, managed to avoid large-scale urbanization.", ""]
@@ -36,8 +49,8 @@ RSpec.describe ScraperService do
       expect(scraped_array.first).to eq(result)
     end
     it 'scrapes robotic' do
-      result = ["/images/c/c2/Domestic_protocols.png, Domestic Protocols", "2", "", "x", "Can be employed in Servant Jobs if under AI Servitude\n Amenities from Jobs +20%", "Robot", "Specialized equipment and behavior protocols for all conceivable domestic needs. Full functionality guaranteed.(Has no effect on Synthetics with Citizenship Rights.)"]
-      scraped_array = ScraperService.new.traits_scraper(-1, 7)
+      result = ["/images/c/c2/Domestic_protocols.png, Domestic Protocols", "2", "", "x", "Can be employed in Servant Jobs if under AI Servitude\n Amenities from Jobs +20%", "", "Droids", "Specialized equipment and behavior protocols for all conceivable domestic needs. Full functionality guaranteed."]
+      scraped_array = ScraperService.new.traits_scraper(-1, 8)
       expect(scraped_array.first).to eq(result)
     end
   end
