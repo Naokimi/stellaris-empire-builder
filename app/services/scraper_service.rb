@@ -3,49 +3,40 @@ require 'open-uri'
 class ScraperService
   def civics_scraper(tables_index, slice_size)
     tables = tables_scraper('https://stellaris.paradoxwikis.com/Civics')
+
     mapped_tables = tables[tables_index].search('td').map do |element|
       icon_src = element.children.children.attribute('src')
       icon_src && element.text.strip.empty? ? icon_src.value : element.text.strip
     end
+
     slicer(mapped_tables, slice_size)
   end
 
   def ethics_scraper
     document = html_doc('https://stellaris.paradoxwikis.com/Ethics')
-    last_gestalt_index = 67
     sanitized_range = 0..-7
+    slice_size = 4
 
     mapped_headlines = default_scraper(document, 'h3').map do |element|
       element.text.strip[sanitized_range]
     end
-    mapped_tables = tables_scraper(document).search('td').each_with_index.map do |element, i|
-      icon_src = element.children.children.children.attribute('src')
-      if i > last_gestalt_index
-        nil
-      elsif (i % 4).zero?
-        icon_src.value + ', ' + element.text.strip + ', ' + mapped_headlines[i / 16]
-      else
-        element.text.strip
-      end
+
+    mapped_tables = tables_scraper(document).search('td')
+                                            .each_with_index.map do |element, i|
+      ethics_content_mapper(i, element, mapped_headlines, slice_size)
     end
-    slicer(mapped_tables.compact, 4)
+
+    slicer(mapped_tables.compact, slice_size)
   end
 
   def traits_scraper(tables_index, slice_size)
     tables = tables_scraper('https://stellaris.paradoxwikis.com/Traits')
-    mapped_tables = tables[tables_index].search('td').each_with_index.map do |element, i|
-      lithoid_restriction = element.children.attribute('alt')
-      icon_src = element.children.children.attribute('src')
-      if lithoid_restriction
-        'x'
-      elsif (i % slice_size).zero?
-        icon_src.value + ', ' + element.text.strip
-      elsif icon_src && element.text.strip.empty?
-        icon_src.value
-      else
-        element.text.strip
-      end
+    table = tables[tables_index]
+
+    mapped_tables = table.search('td').each_with_index.map do |element, i|
+      traits_content_mapper(i, slice_size, element)
     end
+
     slicer(mapped_tables, slice_size)
   end
 
@@ -54,6 +45,20 @@ class ScraperService
   def default_scraper(url_or_doc, target)
     document = url_or_doc.class == String ? html_doc(url_or_doc) : url_or_doc
     document.search(target)
+  end
+
+  def ethics_content_mapper(ind, element, mapped_headlines, slice_size)
+    last_gestalt_index = 67
+    headline = mapped_headlines[ind / (slice_size * 4)]
+    icon_src = element.children.children.children.attribute('src')
+
+    if ind > last_gestalt_index
+      nil
+    elsif (ind % slice_size).zero?
+      icon_src.value + ', ' + element.text.strip + ', ' + headline
+    else
+      element.text.strip
+    end
   end
 
   def html_doc(url)
@@ -69,5 +74,20 @@ class ScraperService
 
   def tables_scraper(url_or_doc)
     default_scraper(url_or_doc, '.mildtable tbody')
+  end
+
+  def traits_content_mapper(ind, slice_size, element)
+    lithoid_restriction = element.children.attribute('alt')
+    icon_src = element.children.children.attribute('src')
+
+    if lithoid_restriction
+      'x'
+    elsif (ind % slice_size).zero?
+      icon_src.value + ', ' + element.text.strip
+    elsif icon_src && element.text.strip.empty?
+      icon_src.value
+    else
+      element.text.strip
+    end
   end
 end
