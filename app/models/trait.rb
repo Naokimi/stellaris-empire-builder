@@ -3,4 +3,6 @@ class Trait < ApplicationRecord
   validates :icon, presence: true, uniqueness: true
   validates :value, numericality: { greater_than: -3, less_than: 5 }
   validates :type, inclusion: { in: %w[standard biological lithoid robotic] }
+
+  has_many :species, through: :species_traits
 end

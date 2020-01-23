@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_100552) do
+ActiveRecord::Schema.define(version: 2020_01_23_121710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 2020_01_23_100552) do
     t.index ["origin_id"], name: "index_species_on_origin_id"
   end
 
+  create_table "species_traits", force: :cascade do |t|
+    t.bigint "species_id", null: false
+    t.bigint "trait_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["species_id"], name: "index_species_traits_on_species_id"
+    t.index ["trait_id"], name: "index_species_traits_on_trait_id"
+  end
+
   create_table "traits", force: :cascade do |t|
     t.string "name"
     t.string "icon"
@@ -69,4 +78,6 @@ ActiveRecord::Schema.define(version: 2020_01_23_100552) do
   end
 
   add_foreign_key "species", "origins"
+  add_foreign_key "species_traits", "species"
+  add_foreign_key "species_traits", "traits"
 end

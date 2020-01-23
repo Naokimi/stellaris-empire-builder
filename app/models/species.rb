@@ -15,6 +15,8 @@ class Species < ApplicationRecord
   validates :archetype, inclusion: { in: ARCHETYPES }
 
   belongs_to :origin
+  has_many :traits, through: :species_traits
 
   # create a method portraits that returns the scraped portraits for the specific archetype
+  # or create a portrait model, scrape images from wiki, and list the portraits based on archetype
 end
