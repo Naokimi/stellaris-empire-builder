@@ -16,6 +16,7 @@ class Species < ApplicationRecord
 
   belongs_to :origin
   has_many :traits, through: :species_traits
+  has_many :homeworlds
 
   # create a method portraits that returns the scraped portraits for the specific archetype
   # or create a portrait model, scrape images from wiki, and list the portraits based on archetype
