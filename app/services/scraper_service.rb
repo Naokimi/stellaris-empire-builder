@@ -29,6 +29,22 @@ class ScraperService
     slicer(mapped_tables.compact, slice_size)
   end
 
+  def governments_scraper
+    table = tables_scraper('https://stellaris.paradoxwikis.com/Government').first
+    slice_size = 7
+
+    mapped_tables = table.search('td').each_with_index.map do |element, i|
+      icon_src = element.children.children.attribute('src')
+      if (i % slice_size).zero?
+        icon_src.value + ', ' + element.text.strip
+      else
+        element.text.strip
+      end
+    end
+
+    slicer(mapped_tables, slice_size)
+  end
+
   def traits_scraper(tables_index, slice_size)
     tables = tables_scraper('https://stellaris.paradoxwikis.com/Traits')
     table = tables[tables_index]
