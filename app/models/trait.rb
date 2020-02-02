@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: traits
+#
+#  id          :bigint           not null, primary key
+#  name        :string
+#  icon        :string
+#  value       :integer
+#  effects     :string
+#  description :text
+#  category    :string
+#  type        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Trait < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :icon, presence: true, uniqueness: true

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: ethics
+#
+#  id          :bigint           not null, primary key
+#  name        :string
+#  icon        :string
+#  value       :integer
+#  effects     :string
+#  category    :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Ethic < ApplicationRecord
   ETHIC_CATEGORIES = [
     'Authoritarian - Egalitarian',

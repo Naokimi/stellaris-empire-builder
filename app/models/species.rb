@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: species
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  bigraphy   :text
+#  archetype  :string
+#  portrait   :string
+#  origin_id  :bigint           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Species < ApplicationRecord
   ARCHETYPES = %w[Humanoid
                   Mammalian
