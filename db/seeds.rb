@@ -144,4 +144,15 @@ traits.each do |trait|
   end
 end
 
+p 'creating governments'
+governments_array = ScraperService.new.governments_scraper
+# => ["/images/a/a8/Auth_democratic.png, Democratic", "Democratic", "10 years", "", "Rulers have mandates\n Re-election", "Authoritarian\n Fanatic Authoritarian\n Gestalt Consciousness", "Democratic governments have regular elections where all citizens can vote on who should represent them."]
+governments_array.each do |government|
+  Government.create!(
+    type: government.first.split(', ').second,
+    icon: government.first.split(', ').first,
+    description: government.last
+  )
+end
+
 p 'done'
