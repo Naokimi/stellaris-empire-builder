@@ -1,6 +1,6 @@
 require 'open-uri'
 
-class ScraperService
+class StellarisWikiScraper
   def civics_scraper(tables_index, slice_size)
     tables = tables_scraper('https://stellaris.paradoxwikis.com/Civics')
 
