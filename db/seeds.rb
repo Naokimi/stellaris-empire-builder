@@ -7,16 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 wiki_url = 'https://stellaris.paradoxwikis.com'
 
+p 'purging database'
+
+Ethic.destroy_all
+Civic.destroy_all
+Trait.destroy_all
+Government.destroy_all
+
 p 'creating ethics'
 
 ethics_array = ScraperService.new.ethics_scraper
 # => ["/images/thumb/1/10/Fanatic_Authoritarian.png/42px-Fanatic_Authoritarian.png, Fanatic Authoritarian, Authoritarian - Egalitarian", "+1 Monthly Influence\n +10% Worker Output", "Must have  Autocratic authority\nAllows Stratified Economy Living Standards\nCan Enslave aliens", "A single voice, a single throne, a single state. It is the solemn duty of the masses to obey those enlightened few who have been charged with the great responsibility of leadership."]
 ethics_array.each do |ethic|
   ethic_name = ethic.first.split(', ').second
-  ethic_value = case ethic_name
-                when include?('Gestalt')
+  ethic_value = if ethic_name.include?('Gestalt')
                   3
-                when include?('Fanatic')
+                elsif ethic_name.include?('Fanatic')
                   2
                 else
                   1
@@ -25,15 +31,15 @@ ethics_array.each do |ethic|
     name: ethic_name,
     icon: wiki_url + ethic.first.split(', ').first,
     value: ethic_value,
-    effects: civic.second,
-    description: civic.third,
+    effects: ethic.second,
+    description: ethic.third,
     category: ethic.first.split(', ').third
   )
 end
 
 p 'creating Standard civics'
 
-civics_array = ScraperService.new.default_scraper(0, 6)
+civics_array = ScraperService.new.civics_scraper(0, 6)
 # => ["/images/thumb/1/1f/Civic_agrarian_idyll.png/50px-Civic_agrarian_idyll.png", "Agrarian Idyll", "+1 housing from Generator, Mining and Agriculture districts\n −1 housing from City Districts\n Farmers also produce  +2 amenities\n Cannnot pick  Arcology Project ascension perk", "Pacifist\n Syncretic Evolution\n Slaver Guilds\n Post-Apocalyptic", "A simple and peaceful life can often be the most rewarding. This agrarian society has, to a large extent, managed to avoid large-scale urbanization.", ""]
 civics_array.each do |civic|
   Civic.create!(
@@ -47,7 +53,7 @@ end
 
 p 'creating Corporate civics'
 
-civics_array = ScraperService.new.default_scraper(2, 4)
+civics_array = ScraperService.new.civics_scraper(2, 4)
 # => ["/images/5/5d/Civic_brand_loyalty.png", "Brand Loyalty", "+15% Monthly Unity", "This Megacorporation has fostered a great sense of brand loyalty among its internal consumer base.  Its catchy corporate slogans can be recited by nearly everyone."]
 civics_array.each do |civic|
   Civic.create!(
@@ -61,7 +67,7 @@ end
 
 p 'creating Hive Mind civics'
 
-civics_array = ScraperService.new.default_scraper(3, 4)
+civics_array = ScraperService.new.civics_scraper(3, 4)
 # => ["/images/thumb/4/42/Civic_ascetic.png/50px-Civic_ascetic.png", "Ascetic", "−15% Pop Amenities Usage", "The Hive Mind cares little for material comforts."]
 civics_array.each do |civic|
   Civic.create!(
@@ -75,7 +81,7 @@ end
 
 p 'creating Machine Intelligence civics'
 
-civics_array = ScraperService.new.default_scraper(4, 4)
+civics_array = ScraperService.new.civics_scraper(4, 4)
 # => ["/images/thumb/d/d3/Civic_machine_builder.png/50px-Civic_machine_builder.png", "Constructobot", "−10% Building and District cost\n −10% Building and District upkeep", "Responsible for organizing all planetary construction since its inception, the Machine Intelligence executes efficiently on all manner of facility construction projects."]
 civics_array.each do |civic|
   Civic.create!(
