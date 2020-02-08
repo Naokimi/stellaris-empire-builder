@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-wiki_url = 'https://stellaris.paradoxwikis.com'
 
 p 'purging database'
 
@@ -17,25 +16,7 @@ Government.destroy_all
 p 'creating ethics'
 
 ethics_array = StellarisWikiScraper.new.ethics_scraper
-# => ["/images/thumb/1/10/Fanatic_Authoritarian.png/42px-Fanatic_Authoritarian.png, Fanatic Authoritarian, Authoritarian - Egalitarian", "+1 Monthly Influence\n +10% Worker Output", "Must have  Autocratic authority\nAllows Stratified Economy Living Standards\nCan Enslave aliens", "A single voice, a single throne, a single state. It is the solemn duty of the masses to obey those enlightened few who have been charged with the great responsibility of leadership."]
-ethics_array.each do |ethic|
-  ethic_name = ethic.first.split(', ').second
-  ethic_value = if ethic_name.include?('Gestalt')
-                  3
-                elsif ethic_name.include?('Fanatic')
-                  2
-                else
-                  1
-                end
-  Ethic.create!(
-    name: ethic_name,
-    icon: wiki_url + ethic.first.split(', ').first,
-    value: ethic_value,
-    effects: ethic.second,
-    description: ethic.third,
-    category: ethic.first.split(', ').third
-  )
-end
+SeedPopulator.new(ethics_array).ethics_creator
 
 p 'creating Standard civics'
 
