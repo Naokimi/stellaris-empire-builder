@@ -3,11 +3,19 @@
 # Table name: homeworlds
 #
 #  id         :bigint           not null, primary key
+#  group      :string
 #  name       :string
-#  species_id :bigint           not null
-#  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  species_id :bigint           not null
+#
+# Indexes
+#
+#  index_homeworlds_on_species_id  (species_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (species_id => species.id)
 #
 
 class Homeworld < ApplicationRecord

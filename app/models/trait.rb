@@ -3,13 +3,13 @@
 # Table name: traits
 #
 #  id          :bigint           not null, primary key
-#  name        :string
-#  icon        :string
-#  value       :integer
-#  effects     :string
-#  description :text
 #  category    :string
-#  type        :string
+#  description :text
+#  effects     :string
+#  group       :string
+#  icon        :string
+#  name        :string
+#  value       :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

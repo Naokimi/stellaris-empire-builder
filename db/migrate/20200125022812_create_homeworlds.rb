@@ -3,7 +3,7 @@ class CreateHomeworlds < ActiveRecord::Migration[6.0]
     create_table :homeworlds do |t|
       t.string :name
       t.references :species, null: false, foreign_key: true
-      t.string :type
+      t.string :group
 
       t.timestamps
     end

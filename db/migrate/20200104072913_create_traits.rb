@@ -7,7 +7,7 @@ class CreateTraits < ActiveRecord::Migration[6.0]
       t.string :effects
       t.text :description
       t.string :category
-      t.string :type
+      t.string :group
 
       t.timestamps
     end

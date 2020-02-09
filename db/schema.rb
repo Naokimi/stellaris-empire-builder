@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_104659) do
     t.string "name"
     t.string "icon"
     t.string "effects"
-    t.string "type"
+    t.string "group"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_104659) do
   end
 
   create_table "governments", force: :cascade do |t|
-    t.string "type"
+    t.string "group"
     t.string "icon"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_104659) do
   create_table "homeworlds", force: :cascade do |t|
     t.string "name"
     t.bigint "species_id", null: false
-    t.string "type"
+    t.string "group"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["species_id"], name: "index_homeworlds_on_species_id"
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_104659) do
 
   create_table "species", force: :cascade do |t|
     t.string "name"
-    t.text "bigraphy"
+    t.text "biography"
     t.string "archetype"
     t.string "portrait"
     t.bigint "origin_id", null: false
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_104659) do
     t.string "effects"
     t.text "description"
     t.string "category"
-    t.string "type"
+    t.string "group"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

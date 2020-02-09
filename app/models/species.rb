@@ -3,13 +3,21 @@
 # Table name: species
 #
 #  id         :bigint           not null, primary key
-#  name       :string
-#  bigraphy   :text
 #  archetype  :string
+#  biography  :text
+#  name       :string
 #  portrait   :string
-#  origin_id  :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  origin_id  :bigint           not null
+#
+# Indexes
+#
+#  index_species_on_origin_id  (origin_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (origin_id => origins.id)
 #
 
 class Species < ApplicationRecord

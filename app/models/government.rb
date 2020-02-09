@@ -3,9 +3,9 @@
 # Table name: governments
 #
 #  id          :bigint           not null, primary key
-#  type        :string
-#  icon        :string
 #  description :text
+#  group       :string
+#  icon        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

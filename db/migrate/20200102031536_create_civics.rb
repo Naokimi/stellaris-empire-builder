@@ -4,7 +4,7 @@ class CreateCivics < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :icon
       t.string :effects
-      t.string :type
+      t.string :group
       t.text :description
 
       t.timestamps
