@@ -21,58 +21,22 @@ SeedPopulator.new(ethics_array).ethics_creator
 p 'creating Standard civics'
 
 civics_array = StellarisWikiScraper.new.civics_scraper(0, 6)
-# => ["/images/thumb/1/1f/Civic_agrarian_idyll.png/50px-Civic_agrarian_idyll.png", "Agrarian Idyll", "+1 housing from Generator, Mining and Agriculture districts\n −1 housing from City Districts\n Farmers also produce  +2 amenities\n Cannnot pick  Arcology Project ascension perk", "Pacifist\n Syncretic Evolution\n Slaver Guilds\n Post-Apocalyptic", "A simple and peaceful life can often be the most rewarding. This agrarian society has, to a large extent, managed to avoid large-scale urbanization.", ""]
-civics_array.each do |civic|
-  Civic.create!(
-    name: civic.second,
-    icon: wiki_url + civic.first,
-    effects: civic.third,
-    description: civic.fifth,
-    type: 'standard'
-  )
-end
+SeedPopulator.new(civics_array, 'standard').civics_creator
 
 p 'creating Corporate civics'
 
 civics_array = StellarisWikiScraper.new.civics_scraper(2, 4)
-# => ["/images/5/5d/Civic_brand_loyalty.png", "Brand Loyalty", "+15% Monthly Unity", "This Megacorporation has fostered a great sense of brand loyalty among its internal consumer base.  Its catchy corporate slogans can be recited by nearly everyone."]
-civics_array.each do |civic|
-  Civic.create!(
-    name: civic.second,
-    icon: wiki_url + civic.first,
-    effects: civic.third,
-    description: civic.fourth.split("\n").first,
-    type: 'corporate'
-  )
-end
+SeedPopulator.new(civics_array, 'corporate').civics_creator
 
 p 'creating Hive Mind civics'
 
 civics_array = StellarisWikiScraper.new.civics_scraper(3, 4)
-# => ["/images/thumb/4/42/Civic_ascetic.png/50px-Civic_ascetic.png", "Ascetic", "−15% Pop Amenities Usage", "The Hive Mind cares little for material comforts."]
-civics_array.each do |civic|
-  Civic.create!(
-    name: civic.second,
-    icon: wiki_url + civic.first,
-    effects: civic.third,
-    description: civic.fourth.split("\n").first,
-    type: 'hive'
-  )
-end
+SeedPopulator.new(civics_array, 'hive').civics_creator
 
 p 'creating Machine Intelligence civics'
 
 civics_array = StellarisWikiScraper.new.civics_scraper(4, 4)
-# => ["/images/thumb/d/d3/Civic_machine_builder.png/50px-Civic_machine_builder.png", "Constructobot", "−10% Building and District cost\n −10% Building and District upkeep", "Responsible for organizing all planetary construction since its inception, the Machine Intelligence executes efficiently on all manner of facility construction projects."]
-civics_array.each do |civic|
-  Civic.create!(
-    name: civic.second,
-    icon: wiki_url + civic.first,
-    effects: civic.third,
-    description: civic.fourth.split("\n").first,
-    type: 'machine'
-  )
-end
+SeedPopulator.new(civics_array, 'machine').civics_creator
 
 p 'creating standard and biological traits'
 traits = StellarisWikiScraper.new.traits_scraper(0, 7)
