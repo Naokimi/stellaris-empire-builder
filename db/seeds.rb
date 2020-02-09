@@ -48,7 +48,7 @@ traits.each do |trait|
     effects: trait.second,
     value: trait.fifth.to_i,
     description: trait.seventh,
-    type: trait.fourth.empty? ? 'standard' : 'biological',
+    group: trait.fourth.empty? ? 'standard' : 'biological',
     category: (trait.third.split("\n ") << trait.first).sort.join(' - ')
   )
 end
@@ -60,7 +60,7 @@ Trait.create!(
   effects: 'Not Affected by Happiness',
   value: 0,
   description: 'This species is made up of semi-autonomous individuals slaved to a single, unfathomably vast consciousness.',
-  type: 'biological'
+  group: 'biological'
 )
 
 p 'creating lithoid traits'
@@ -73,7 +73,7 @@ traits.each do |trait|
     effects: trait.second,
     value: trait.fourth.to_i,
     description: trait[5],
-    type: 'lithoid',
+    group: 'lithoid',
     category: (trait.third.split("\n ") << trait.first).sort.join(' - ')
   )
 end
@@ -89,7 +89,7 @@ traits.each do |trait|
       effects: trait[4],
       value: trait.second.to_i,
       description: trait[7],
-      type: 'robotic',
+      group: 'robotic',
       category: (trait[5].split("\n ") << trait.first).sort.join(' - ')
     )
   end
@@ -100,7 +100,7 @@ governments_array = StellarisWikiScraper.new.governments_scraper
 # => ["/images/a/a8/Auth_democratic.png, Democratic", "Democratic", "10 years", "", "Rulers have mandates\n Re-election", "Authoritarian\n Fanatic Authoritarian\n Gestalt Consciousness", "Democratic governments have regular elections where all citizens can vote on who should represent them."]
 governments_array.each do |government|
   Government.create!(
-    type: government.first.split(', ').second,
+    group: government.first.split(', ').second,
     icon: government.first.split(', ').first,
     description: government.last
   )
