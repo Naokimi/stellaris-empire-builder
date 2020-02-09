@@ -38,7 +38,7 @@ class Homeworld < ApplicationRecord
                             Hive].freeze
 
   validates :name, presence: true, uniqueness: true
-  validates :type, inclusion: { in: DEFAULT_PLANET_TYPES + SPECIAL_PLANET_TYPES }
+  validates :group, inclusion: { in: DEFAULT_PLANET_TYPES + SPECIAL_PLANET_TYPES }
 
   belongs_to :species
 end

@@ -22,6 +22,6 @@ class Government < ApplicationRecord
                    Lithoid
                    Machine].freeze
 
-  validates :type, inclusion: { in: AUTHORITIES }
+  validates :group, inclusion: { in: AUTHORITIES }
   validates :icon, presence: true
 end
