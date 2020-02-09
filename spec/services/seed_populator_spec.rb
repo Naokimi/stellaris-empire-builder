@@ -6,16 +6,16 @@ RSpec.describe SeedPopulator do
 
   context 'Civics' do
     it 'reads correctly the name' do
-      expect(standard_civic[:name]).to eq('Fanatic Authoritarian')
+      expect(standard_civic[:name]).to eq('Agrarian Idyll')
     end
     it 'reads correctly the icon' do
-      expect(standard_civic[:icon]).to eq('https://stellaris.paradoxwikis.com/images/thumb/1/10/Fanatic_Authoritarian.png/42px-Fanatic_Authoritarian.png')
+      expect(standard_civic[:icon]).to eq('https://stellaris.paradoxwikis.com/images/thumb/1/1f/Civic_agrarian_idyll.png/50px-Civic_agrarian_idyll.png')
     end
     it 'reads correctly the effects' do
-      expect(standard_civic[:effects]).to eq("+1 Monthly Influence\n +10% Worker Output")
+      expect(standard_civic[:effects]).to eq("+1 housing from Generator, Mining and Agriculture districts\n −1 housing from City Districts\n Farmers also produce  +2 amenities\n Cannnot pick  Arcology Project ascension perk")
     end
     it 'reads correctly the description' do
-      expect(standard_civic[:description]).to eq('A single voice, a single throne, a single state. It is the solemn duty of the masses to obey those enlightened few who have been charged with the great responsibility of leadership.')
+      expect(standard_civic[:description]).to eq('A simple and peaceful life can often be the most rewarding. This agrarian society has, to a large extent, managed to avoid large-scale urbanization.')
     end
   end
 
