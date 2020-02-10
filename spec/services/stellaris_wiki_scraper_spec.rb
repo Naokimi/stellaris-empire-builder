@@ -3,26 +3,23 @@ require_relative '../shared/scraped_arrays'
 
 RSpec.describe StellarisWikiScraper do
   include_context 'scraped arrays'
+
   context 'Civics' do
     it 'scrapes standard' do
       result = ["/images/thumb/1/1f/Civic_agrarian_idyll.png/50px-Civic_agrarian_idyll.png", "Agrarian Idyll", "+1 housing from Generator, Mining and Agriculture districts\n −1 housing from City Districts\n Farmers also produce  +2 amenities\n Cannnot pick  Arcology Project ascension perk", "Pacifist\n Syncretic Evolution\n Slaver Guilds\n Post-Apocalyptic", "A simple and peaceful life can often be the most rewarding. This agrarian society has, to a large extent, managed to avoid large-scale urbanization.", ""]
-      scraped_array = StellarisWikiScraper.new.civics_scraper(0, 6)
-      expect(scraped_array.first).to eq(result)
+      expect(standard_civics_array.first).to eq(result)
     end
     it 'scrapes corporate' do
       result = ["/images/5/5d/Civic_brand_loyalty.png", "Brand Loyalty", "+15% Monthly Unity", "This Megacorporation has fostered a great sense of brand loyalty among its internal consumer base.  Its catchy corporate slogans can be recited by nearly everyone."]
-      scraped_array = StellarisWikiScraper.new.civics_scraper(2, 4)
-      expect(scraped_array.first).to eq(result)
+      expect(corporate_civics_array.first).to eq(result)
     end
     it 'scrapes hive mind' do
       result = ["/images/thumb/4/42/Civic_ascetic.png/50px-Civic_ascetic.png", "Ascetic", "−15% Pop Amenities Usage", "The Hive Mind cares little for material comforts."]
-      scraped_array = StellarisWikiScraper.new.civics_scraper(3, 4)
-      expect(scraped_array.first).to eq(result)
+      expect(hive_civics_array.first).to eq(result)
     end
     it 'scrapes machine intelligence' do
       result = ["/images/thumb/d/d3/Civic_machine_builder.png/50px-Civic_machine_builder.png", "Constructobot", "−10% Building and District cost\n −10% Building and District upkeep", "Responsible for organizing all planetary construction since its inception, the Machine Intelligence executes efficiently on all manner of facility construction projects."]
-      scraped_array = StellarisWikiScraper.new.civics_scraper(4, 4)
-      expect(scraped_array.first).to eq(result)
+      expect(machine_civics_array.first).to eq(result)
     end
   end
 
