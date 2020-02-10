@@ -39,19 +39,9 @@ civics_array = StellarisWikiScraper.new.civics_scraper(4, 4)
 SeedPopulator.new(civics_array, 'machine').civics_creator
 
 p 'creating standard and biological traits'
-traits = StellarisWikiScraper.new.traits_scraper(0, 7)
-# => ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\n Nonadaptive\n Robust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]
-traits.each do |trait|
-  Trait.create!(
-    name: trait.first.split(', ').second,
-    icon: wiki_url + trait.first.split(', ').first,
-    effects: trait.second,
-    value: trait.fifth.to_i,
-    description: trait.seventh,
-    group: trait.fourth.empty? ? 'standard' : 'biological',
-    category: (trait.third.split("\n ") << trait.first).sort.join(' - ')
-  )
-end
+
+traits_array = StellarisWikiScraper.new.traits_scraper(0, 7)
+SeedPopulator.new(traits_array).traits_creator
 
 p 'creating hive minded trait'
 Trait.create!(
@@ -64,38 +54,17 @@ Trait.create!(
 )
 
 p 'creating lithoid traits'
-traits = StellarisWikiScraper.new.traits_scraper(1, 6)
-# => ["/images/9/9f/Trait_lithoid.png, Lithoid", "Pop growth Speed -25%\n Habitability +50%\n Army Health +50%\n Leader Lifespan +50\nConsumes  Minerals instead of  Food", "", "0", "0", "This species has a silicon based biology, and consumes minerals rather than food. They are tougher than traditional organics and have slower metabolisms, making them long lived but slow to reproduce."]
-traits.each do |trait|
-  Trait.create!(
-    name: trait.first.split(', ').second,
-    icon: wiki_url + trait.first.split(', ').first,
-    effects: trait.second,
-    value: trait.fourth.to_i,
-    description: trait[5],
-    group: 'lithoid',
-    category: (trait.third.split("\n ") << trait.first).sort.join(' - ')
-  )
-end
+
+traits_array = StellarisWikiScraper.new.traits_scraper(1, 6)
+SeedPopulator.new(traits_array, 'lithoid').traits_creator
 
 p 'creating robotic traits'
-traits = StellarisWikiScraper.new.traits_scraper(-1, 8)
-# => ["/images/c/c2/Domestic_protocols.png, Domestic Protocols", "2", "", "x", "Can be employed in Servant Jobs if under AI Servitude\n Amenities from Jobs +20%", "", "Droids", "Specialized equipment and behavior protocols for all conceivable domestic needs. Full functionality guaranteed."]
-traits.each do |trait|
-  if trait.fourth.empty?
-    Trait.create!(
-      name: trait.first.split(', ').second,
-      icon: wiki_url + trait.first.split(', ').first,
-      effects: trait[4],
-      value: trait.second.to_i,
-      description: trait[7],
-      group: 'robotic',
-      category: (trait[5].split("\n ") << trait.first).sort.join(' - ')
-    )
-  end
-end
+
+traits_array = StellarisWikiScraper.new.traits_scraper(-1, 8)
+SeedPopulator.new(traits_array, 'robotic').traits_creator
 
 p 'creating governments'
+
 governments_array = StellarisWikiScraper.new.governments_scraper
 # => ["/images/a/a8/Auth_democratic.png, Democratic", "Democratic", "10 years", "", "Rulers have mandates\n Re-election", "Authoritarian\n Fanatic Authoritarian\n Gestalt Consciousness", "Democratic governments have regular elections where all citizens can vote on who should represent them."]
 governments_array.each do |government|
@@ -106,4 +75,4 @@ governments_array.each do |government|
   )
 end
 
-p 'done'
+p 'database population completed'
