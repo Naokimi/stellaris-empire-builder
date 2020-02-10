@@ -8,4 +8,11 @@ RSpec.shared_context 'scraped arrays' do
 
   let(:ethics_array) { StellarisWikiScraper.new.ethics_scraper }
   let(:ethic) { SeedPopulator.new([]).ethic_reader(ethics_array.first) }
+
+  let(:standard_traits_array) { StellarisWikiScraper.new.traits_scraper(0, 7) }
+  let(:lithoid_traits_array) { StellarisWikiScraper.new.traits_scraper(1, 6) }
+  let(:robotic_traits_array) { StellarisWikiScraper.new.traits_scraper(-1, 8) }
+  let(:biological_trait) { SeedPopulator.new([]).standard_trait_reader(standard_traits_array.first) }
+  let(:lithoid_trait) { SeedPopulator.new([], 'lithoid').lithoid_trait_reader(lithoid_traits_array.second) }
+  let(:robotic_trait) { SeedPopulator.new([], 'robotic').robotic_trait_reader(robotic_traits_array.second) }
 end

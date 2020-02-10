@@ -45,18 +45,15 @@ RSpec.describe StellarisWikiScraper do
   context 'Traits' do
     it 'scrapes standard and biological' do
       result = ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\n Nonadaptive\n Robust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]
-      scraped_array = StellarisWikiScraper.new.traits_scraper(0, 7)
-      expect(scraped_array.first).to eq(result)
+      expect(standard_traits_array.first).to eq(result)
     end
     it 'scrapes lithoid' do
       result = ["/images/9/9f/Trait_lithoid.png, Lithoid", "Pop growth Speed -25%\n Habitability +50%\n Army Health +50%\n Leader Lifespan +50\nConsumes  Minerals instead of  Food", "", "0", "0", "This species has a silicon based biology, and consumes minerals rather than food. They are tougher than traditional organics and have slower metabolisms, making them long lived but slow to reproduce."]
-      scraped_array = StellarisWikiScraper.new.traits_scraper(1, 6)
-      expect(scraped_array.first).to eq(result)
+      expect(lithoid_traits_array.first).to eq(result)
     end
     it 'scrapes robotic' do
       result = ["/images/c/c2/Domestic_protocols.png, Domestic Protocols", "2", "", "x", "Can be employed in Servant Jobs if under AI Servitude\n Amenities from Jobs +20%", "", "Droids", "Specialized equipment and behavior protocols for all conceivable domestic needs. Full functionality guaranteed."]
-      scraped_array = StellarisWikiScraper.new.traits_scraper(-1, 8)
-      expect(scraped_array.first).to eq(result)
+      expect(robotic_traits_array.first).to eq(result)
     end
   end
 end

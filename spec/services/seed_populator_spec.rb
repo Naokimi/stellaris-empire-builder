@@ -56,4 +56,69 @@ RSpec.describe SeedPopulator do
       expect(ethic[:category]).to eq('Authoritarian - Egalitarian')
     end
   end
+
+  context 'Traits' do
+    context 'standard and bilogical' do
+      it 'reads correctly the name' do
+        expect(biological_trait[:name]).to eq('Adaptive')
+      end
+      it 'reads correctly the icon' do
+        expect(biological_trait[:icon]).to eq('https://stellaris.paradoxwikis.com/images/1/10/Adaptive.png')
+      end
+      it 'reads correctly the value' do
+        expect(biological_trait[:value]).to eq(2)
+      end
+      it 'reads correctly the effects' do
+        expect(biological_trait[:effects]).to eq("Habitability +10%")
+      end
+      it 'reads correctly the description' do
+        expect(biological_trait[:description]).to eq('This species is highly adaptive when it comes to foreign environments.')
+      end
+      it 'reads correctly the category' do
+        expect(biological_trait[:category]).to eq('Adaptive - Extremely Adaptive - Nonadaptive - Robust')
+      end
+    end
+
+    context 'lithoid' do
+      it 'reads correctly the name' do
+        expect(lithoid_trait[:name]).to eq('Gaseous Byproducts')
+      end
+      it 'reads correctly the icon' do
+        expect(lithoid_trait[:icon]).to eq('https://stellaris.paradoxwikis.com/images/e/ef/Trait_lithoid_gaseous_byproducts.png')
+      end
+      it 'reads correctly the value' do
+        expect(lithoid_trait[:value]).to eq(2)
+      end
+      it 'reads correctly the effects' do
+        expect(lithoid_trait[:effects]).to eq("Each Pop produces 0.01 monthly Exotic Gases")
+      end
+      it 'reads correctly the description' do
+        expect(lithoid_trait[:description]).to eq('The metabolic processes of this species cause regular venting of gases useful to industry.')
+      end
+      it 'reads correctly the category' do
+        expect(lithoid_trait[:category]).to eq('Gaseous Byproducts - Scintillating Skin - Volatile Excretions')
+      end
+    end
+
+    context 'robotic' do
+      it 'reads correctly the name' do
+        expect(robotic_trait[:name]).to eq('Double Jointed')
+      end
+      it 'reads correctly the icon' do
+        expect(robotic_trait[:icon]).to eq('https://stellaris.paradoxwikis.com/images/7/78/Double_jointed.png')
+      end
+      it 'reads correctly the value' do
+        expect(robotic_trait[:value]).to eq(1)
+      end
+      it 'reads correctly the effects' do
+        expect(robotic_trait[:effects]).to eq("Pop Housing Usage −10%")
+      end
+      it 'reads correctly the description' do
+        expect(robotic_trait[:description]).to eq('Collapsible labor units with flexible joints that enable them to fold neatly into stacks during transportation, then self-assemble on site.')
+      end
+      it 'reads correctly the category' do
+        expect(robotic_trait[:category]).to eq('Bulky - Double Jointed')
+      end
+    end
+  end
 end
