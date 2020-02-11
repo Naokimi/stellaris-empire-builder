@@ -11,17 +11,6 @@
 #
 
 class Government < ApplicationRecord
-  AUTHORITIES = %w[Humanoid
-                   Mammalian
-                   Reptilian
-                   Avian
-                   Arthropoid
-                   Molluscoid
-                   Fungoid
-                   Plantoid
-                   Lithoid
-                   Machine].freeze
-
-  validates :group, inclusion: { in: AUTHORITIES }
+  validates :authority, presence: true, uniqueness: true
   validates :icon, presence: true
 end

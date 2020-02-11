@@ -63,7 +63,7 @@ class SeedPopulator
     # => ["/images/a/a8/Auth_democratic.png, Democratic", "Democratic", "10 years", "", "Rulers have mandates\n Re-election", "Authoritarian\n Fanatic Authoritarian\n Gestalt Consciousness", "Democratic governments have regular elections where all citizens can vote on who should represent them."]
     Government.create!(
       authority: government.first.split(', ').second,
-      icon: government.first.split(', ').first,
+      icon: WIKI_URL + government.first.split(', ').first,
       description: government.last
     )
   end
