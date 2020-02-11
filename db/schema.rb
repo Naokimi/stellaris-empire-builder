@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_104659) do
   end
 
   create_table "governments", force: :cascade do |t|
-    t.string "group"
+    t.string "authority"
     t.string "icon"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
