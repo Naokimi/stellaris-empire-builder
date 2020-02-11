@@ -66,13 +66,6 @@ SeedPopulator.new(traits_array, 'robotic').traits_creator
 p 'creating governments'
 
 governments_array = StellarisWikiScraper.new.governments_scraper
-# => ["/images/a/a8/Auth_democratic.png, Democratic", "Democratic", "10 years", "", "Rulers have mandates\n Re-election", "Authoritarian\n Fanatic Authoritarian\n Gestalt Consciousness", "Democratic governments have regular elections where all citizens can vote on who should represent them."]
-governments_array.each do |government|
-  Government.create!(
-    group: government.first.split(', ').second,
-    icon: government.first.split(', ').first,
-    description: government.last
-  )
-end
+SeedPopulator.new(governments_array).governments_creator
 
 p 'database population completed'

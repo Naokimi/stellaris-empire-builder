@@ -53,6 +53,21 @@ class SeedPopulator
     }
   end
 
+  def governments_creator
+    @scraped_array.each do |government|
+      Government.create!(government_reader(government))
+    end
+  end
+
+  def government_reader(government)
+    # => ["/images/a/a8/Auth_democratic.png, Democratic", "Democratic", "10 years", "", "Rulers have mandates\n Re-election", "Authoritarian\n Fanatic Authoritarian\n Gestalt Consciousness", "Democratic governments have regular elections where all citizens can vote on who should represent them."]
+    Government.create!(
+      authority: government.first.split(', ').second,
+      icon: government.first.split(', ').first,
+      description: government.last
+    )
+  end
+
   def traits_creator
     @scraped_array.each do |trait|
       if @group == 'lithoid'

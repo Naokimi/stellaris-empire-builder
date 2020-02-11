@@ -35,10 +35,9 @@ RSpec.describe StellarisWikiScraper do
   end
 
   context 'Governments' do
-    scraped_array = StellarisWikiScraper.new.governments_scraper
     it 'scrapes Democracy' do
       result = ["/images/a/a8/Auth_democratic.png, Democratic", "Democratic", "10 years", "", "Rulers have mandates\n Re-election", "Authoritarian\n Fanatic Authoritarian\n Gestalt Consciousness", "Democratic governments have regular elections where all citizens can vote on who should represent them."]
-      expect(scraped_array.first).to eq(result)
+      expect(governments_array.first).to eq(result)
     end
   end
 

@@ -57,6 +57,18 @@ RSpec.describe SeedPopulator do
     end
   end
 
+  context 'Governments' do
+    it 'reads correctly the authority' do
+      expect(government[:authority]).to eq('Democratic')
+    end
+    it 'reads correctly the icon' do
+      expect(government[:icon]).to eq('https://stellaris.paradoxwikis.com/images/a/a8/Auth_democratic.png')
+    end
+    it 'reads correctly the description' do
+      expect(government[:description]).to eq('Democratic governments have regular elections where all citizens can vote on who should represent them.')
+    end
+  end
+
   context 'Traits' do
     context 'standard and bilogical' do
       it 'reads correctly the name' do
