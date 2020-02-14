@@ -90,7 +90,7 @@ class SeedPopulator
       value: trait.fifth.to_i,
       description: trait[6],
       group: trait.fourth.empty? ? 'standard' : 'biological',
-      category: (trait.third.split("\n ") << name).sort.join(' - ')
+      category: (trait.third.split("\n") << name).sort.join(' - ')
     )
   end
 
@@ -104,7 +104,7 @@ class SeedPopulator
       value: trait.fourth.to_i,
       description: trait[5],
       group: @group,
-      category: (trait.third.split("\n ") << name).sort.join(' - ')
+      category: (trait.third.split("\n") << name).sort.join(' - ')
     )
   end
 
@@ -120,7 +120,7 @@ class SeedPopulator
       value: trait.second.to_i,
       description: trait[7],
       group: @group,
-      category: (trait[5].split("\n ") << name).sort.join(' - ')
+      category: (trait[5].split("\n") << name).sort.join(' - ')
     )
   end
 end

@@ -43,7 +43,7 @@ RSpec.describe StellarisWikiScraper do
 
   context 'Traits' do
     it 'scrapes standard and biological' do
-      result = ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\n Nonadaptive\n Robust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]
+      result = ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\nNonadaptive\nRobust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]
       expect(standard_traits_array.first).to eq(result)
     end
     it 'scrapes lithoid' do
