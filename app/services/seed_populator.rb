@@ -18,13 +18,13 @@ class SeedPopulator
     # => ["/images/thumb/4/42/Civic_ascetic.png/50px-Civic_ascetic.png", "Ascetic", "−15% Pop Amenities Usage", "The Hive Mind cares little for material comforts."]
     # => ["/images/thumb/d/d3/Civic_machine_builder.png/50px-Civic_machine_builder.png", "Constructobot", "−10% Building and District cost\n −10% Building and District upkeep", "Responsible for organizing all planetary construction since its inception, the Machine Intelligence executes efficiently on all manner of facility construction projects."]
     description = @group == 'standard' ? civic.fifth : civic.fourth.split("\n").first
-    Civic.create!(
+    {
       name: civic.second,
       icon: WIKI_URL + civic.first,
       effects: civic.third,
       description: description,
       group: @group
-    )
+    }
   end
 
   def ethics_creator
@@ -61,11 +61,11 @@ class SeedPopulator
 
   def government_reader(government)
     # => ["/images/a/a8/Auth_democratic.png, Democratic", "Democratic", "10 years", "", "Rulers have mandates\n Re-election", "Authoritarian\n Fanatic Authoritarian\n Gestalt Consciousness", "Democratic governments have regular elections where all citizens can vote on who should represent them."]
-    Government.create!(
+    {
       authority: government.first.split(', ').second,
       icon: WIKI_URL + government.first.split(', ').first,
       description: government.last
-    )
+    }
   end
 
   def traits_creator
@@ -73,6 +73,8 @@ class SeedPopulator
       if @group == 'lithoid'
         Trait.create!(lithoid_trait_reader(trait))
       elsif @group == 'robotic'
+        next if trait.fourth.present?
+
         Trait.create!(robotic_trait_reader(trait))
       else
         Trait.create!(standard_trait_reader(trait))
@@ -83,7 +85,7 @@ class SeedPopulator
   def standard_trait_reader(trait)
     # => ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\nNonadaptive\nRobust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]
     name = trait.first.split(', ').second
-    Trait.create!(
+    {
       name: name,
       icon: WIKI_URL + trait.first.split(', ').first,
       effects: trait.second,
@@ -91,13 +93,13 @@ class SeedPopulator
       description: trait[6],
       group: trait.fourth.empty? ? 'standard' : 'biological',
       category: (trait.third.split("\n ") << name).sort.join(' - ')
-    )
+    }
   end
 
   def lithoid_trait_reader(trait)
     # => ["/images/9/9f/Trait_lithoid.png, Lithoid", "Pop growth Speed -25%\n Habitability +50%\n Army Health +50%\n Leader Lifespan +50\nConsumes  Minerals instead of  Food", "", "0", "0", "This species has a silicon based biology, and consumes minerals rather than food. They are tougher than traditional organics and have slower metabolisms, making them long lived but slow to reproduce."]
     name = trait.first.split(', ').second
-    Trait.create!(
+    {
       name: name,
       icon: WIKI_URL + trait.first.split(', ').first,
       effects: trait.second,
@@ -105,15 +107,13 @@ class SeedPopulator
       description: trait[5],
       group: @group,
       category: (trait.third.split("\n ") << name).sort.join(' - ')
-    )
+    }
   end
 
   def robotic_trait_reader(trait)
     # => ["/images/c/c2/Domestic_protocols.png, Domestic Protocols", "2", "", "x", "Can be employed in Servant Jobs if under AI Servitude\n Amenities from Jobs +20%", "", "Droids", "Specialized equipment and behavior protocols for all conceivable domestic needs. Full functionality guaranteed."]
-    return if trait.fourth.present?
-
     name = trait.first.split(', ').second
-    Trait.create!(
+    {
       name: name,
       icon: WIKI_URL + trait.first.split(', ').first,
       effects: trait[4],
@@ -121,6 +121,6 @@ class SeedPopulator
       description: trait[7],
       group: @group,
       category: (trait[5].split("\n ") << name).sort.join(' - ')
-    )
+    }
   end
 end
