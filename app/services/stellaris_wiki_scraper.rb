@@ -93,16 +93,16 @@ class StellarisWikiScraper
   end
 
   def traits_content_mapper(ind, slice_size, element)
-    lithoid_restriction = element.children.children.attribute('alt')
-    icon_src = element.children.children.children.attribute('src')
+    lithoid_restriction = element.children.attribute('alt')
+    icon_src = element.children.children.attribute('src')
     stripped_span_tag = element.text.gsub(' ', '').strip
 
     if lithoid_restriction
       'x'
     elsif (ind % slice_size).zero?
       icon_src.value + ', ' + stripped_span_tag
-    elsif (ind % slice_size) == 2
-      element.text.strip.gsub('  ', '')
+    # elsif (ind % slice_size) == 2
+    #   element.text.strip.gsub('  ', '')
     elsif icon_src && element.text.strip.empty?
       icon_src.value
     else
