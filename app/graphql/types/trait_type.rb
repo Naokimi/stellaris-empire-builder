@@ -9,5 +9,10 @@ module Types
     field :category, String, null: true
     field :group, String, null: false
     # field :species, [Types::SpeciesType], null: true
+    field :effects_array, [String], null: true
+
+    def effects_array
+      object.effects.split("\n")
+    end
   end
 end

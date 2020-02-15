@@ -6,5 +6,10 @@ module Types
     field :effects, String, null: true
     field :description, String, null: true
     field :group, String, null: false
+    field :effects_array, [String], null: true
+
+    def effects_array
+      object.effects.split("\n")
+    end
   end
 end
