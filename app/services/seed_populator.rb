@@ -85,6 +85,7 @@ class SeedPopulator
   def standard_trait_reader(trait)
     # => ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\nNonadaptive\nRobust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]
     name = trait.first.split(', ').second
+    category = (trait.third.split("\n ") << name).sort.join(' - ')
     {
       name: name,
       icon: WIKI_URL + trait.first.split(', ').first,
@@ -92,13 +93,14 @@ class SeedPopulator
       value: trait.fifth.to_i,
       description: trait[6],
       group: trait.fourth.empty? ? 'standard' : 'biological',
-      category: (trait.third.split("\n ") << name).sort.join(' - ')
+      category: trait.third.present? ? category : nil
     }
   end
 
   def lithoid_trait_reader(trait)
     # => ["/images/9/9f/Trait_lithoid.png, Lithoid", "Pop growth Speed -25%\n Habitability +50%\n Army Health +50%\n Leader Lifespan +50\nConsumes  Minerals instead of  Food", "", "0", "0", "This species has a silicon based biology, and consumes minerals rather than food. They are tougher than traditional organics and have slower metabolisms, making them long lived but slow to reproduce."]
     name = trait.first.split(', ').second
+    category = (trait.third.split("\n ") << name).sort.join(' - ')
     {
       name: name,
       icon: WIKI_URL + trait.first.split(', ').first,
@@ -106,13 +108,14 @@ class SeedPopulator
       value: trait.fourth.to_i,
       description: trait[5],
       group: @group,
-      category: (trait.third.split("\n ") << name).sort.join(' - ')
+      category: trait.third.present? ? category : nil
     }
   end
 
   def robotic_trait_reader(trait)
     # => ["/images/c/c2/Domestic_protocols.png, Domestic Protocols", "2", "", "x", "Can be employed in Servant Jobs if under AI Servitude\n Amenities from Jobs +20%", "", "Droids", "Specialized equipment and behavior protocols for all conceivable domestic needs. Full functionality guaranteed."]
     name = trait.first.split(', ').second
+    category = (trait[5].split("\n ") << name).sort.join(' - ')
     {
       name: name,
       icon: WIKI_URL + trait.first.split(', ').first,
@@ -120,7 +123,7 @@ class SeedPopulator
       value: trait.second.to_i,
       description: trait[7],
       group: @group,
-      category: (trait[5].split("\n ") << name).sort.join(' - ')
+      category: trait[5].present? ? category : nil
     }
   end
 end
