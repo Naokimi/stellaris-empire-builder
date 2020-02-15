@@ -38,6 +38,29 @@ module Types
       Empire.find(id)
     end
 
+    # Ethics
+    field :ethics, [Types::EthicType], null: false
+
+    def ethics
+      Ethic.all
+    end
+
+    field :ethic, Types::EthicType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def ethic(id:)
+      Ethic.find(id)
+    end
+
+    field :ethics_by_group, [Types::EthicType], null: false do
+      argument :group, String, required: true
+    end
+
+    def ethics_by_group(group:)
+      Ethic.where(group: group)
+    end
+
     # Traits
     field :traits, [Types::TraitType], null: false
 
