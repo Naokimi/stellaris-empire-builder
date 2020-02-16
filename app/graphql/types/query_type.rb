@@ -61,6 +61,21 @@ module Types
       Ethic.where(group: group)
     end
 
+    # Homeworlds
+    field :homeworlds, [Types::HomeworldType], null: false
+
+    def homeworlds
+      Homeworld.all
+    end
+
+    field :homeworld, Types::HomeworldType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def homeworld(id:)
+      Homeworld.find(id)
+    end
+
     # Traits
     field :traits, [Types::TraitType], null: false
 
