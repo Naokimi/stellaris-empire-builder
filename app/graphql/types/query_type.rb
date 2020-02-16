@@ -61,6 +61,21 @@ module Types
       Ethic.where(group: group)
     end
 
+    # Governments
+    field :governments, [Types::GovernmentType], null: false
+
+    def governments
+      Government.all
+    end
+
+    field :government, Types::GovernmentType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def government(id:)
+      Government.find(id)
+    end
+
     # Homeworlds
     field :homeworlds, [Types::HomeworldType], null: false
 
