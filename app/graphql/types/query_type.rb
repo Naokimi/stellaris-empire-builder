@@ -106,6 +106,21 @@ module Types
       Origin.find(id)
     end
 
+    # Species
+    field :species, [Types::SpeciesType], null: false
+
+    def species
+      Species.all
+    end
+
+    field :species, Types::SpeciesType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def single_species(id:)
+      Species.find(id)
+    end
+
     # Traits
     field :traits, [Types::TraitType], null: false
 
