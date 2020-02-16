@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_104659) do
   create_table "homeworlds", force: :cascade do |t|
     t.string "name"
     t.bigint "species_id", null: false
-    t.string "group"
+    t.string "kind"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["species_id"], name: "index_homeworlds_on_species_id"

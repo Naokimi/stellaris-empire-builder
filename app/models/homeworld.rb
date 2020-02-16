@@ -3,7 +3,7 @@
 # Table name: homeworlds
 #
 #  id         :bigint           not null, primary key
-#  group      :string
+#  kind       :string
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -19,7 +19,7 @@
 #
 
 class Homeworld < ApplicationRecord
-  DEFAULT_PLANET_TYPES = %w[Arid
+  DEFAULT_PLANET_KINDS = %w[Arid
                             Desert
                             Savanna
                             Alpine
@@ -28,7 +28,7 @@ class Homeworld < ApplicationRecord
                             Continental
                             Ocean
                             Tropical].freeze
-  SPECIAL_PLANET_TYPES = %w[Gaia
+  SPECIAL_PLANET_KINDS = %w[Gaia
                             Tomb
                             Ecumenopolis
                             Relic
@@ -38,7 +38,7 @@ class Homeworld < ApplicationRecord
                             Hive].freeze
 
   validates :name, presence: true, uniqueness: true
-  validates :group, inclusion: { in: DEFAULT_PLANET_TYPES + SPECIAL_PLANET_TYPES }
+  validates :kind, inclusion: { in: DEFAULT_PLANET_KINDS + SPECIAL_PLANET_KINDS }
 
   belongs_to :species
 end
