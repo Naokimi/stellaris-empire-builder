@@ -76,6 +76,21 @@ module Types
       Homeworld.find(id)
     end
 
+    # Origins
+    field :origins, [Types::OriginType], null: false
+
+    def origins
+      Origin.all
+    end
+
+    field :origin, Types::OriginType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def origin(id:)
+      Origin.find(id)
+    end
+
     # Traits
     field :traits, [Types::TraitType], null: false
 
