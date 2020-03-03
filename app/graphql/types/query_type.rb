@@ -113,7 +113,7 @@ module Types
       Species.all
     end
 
-    field :species, Types::SpeciesType, null: false do
+    field :single_species, Types::SpeciesType, null: false do
       argument :id, ID, required: true
     end
 
