@@ -107,9 +107,9 @@ module Types
     end
 
     # Species
-    field :species, [Types::SpeciesType], null: false
+    field :all_species, [Types::SpeciesType], null: false
 
-    def species
+    def all_species
       Species.all
     end
 

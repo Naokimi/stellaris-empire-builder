@@ -3,14 +3,14 @@ class Mutations::CreateSpecies < Mutations::BaseMutation
   argument :portrait, String, required: true
   argument :biography, String, required: false
   argument :archetype, String, required: true
-  argument :origin, Types::OriginType, required: true
+  argument :origin_id, ID, required: true
 
   field :species, Types::SpeciesType, null: false
   field :errors, [String], null: false
 
-  def resolve(name:, portrait:, biography:, archetype:, origin:)
-    species = Species.new(name: name, portrait: portrait, biography: biography, archetype: archetype)
-    species.origin = origin
+  def resolve(name:, portrait:, biography:, archetype:, origin_id:)
+    species = Species.new(name: name, portrait: portrait, biography: biography,
+                          archetype: archetype, origin_id: origin_id)
     if species.save
       {
         species: species,
