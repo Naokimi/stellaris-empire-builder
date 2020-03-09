@@ -15,7 +15,8 @@
   "dependencies": {
     "tailwindcss": "^1.2.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-tailwind": "^0.4.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -65,6 +66,8 @@
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
+    "sass": "^1.26.2",
+    "sass-loader": "^8.0.2",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "sinon": "^4.0.0",
