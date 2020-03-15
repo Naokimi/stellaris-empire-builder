@@ -1,6 +1,6 @@
-# stellaris-empire-builder-fe
+# stellaris-empire-builder
 
-> An online builder of empires for the game Stellaris
+> A builder for the game Stellaris
 
 ## Build Setup
 
