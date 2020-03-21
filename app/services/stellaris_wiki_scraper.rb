@@ -45,6 +45,23 @@ class StellarisWikiScraper
     slicer(mapped_tables, slice_size)
   end
 
+  def origins_scraper
+    table = tables_scraper('https://stellaris.paradoxwikis.com/Empire').first
+    slice_size = 5
+
+    mapped_tables = table.search('td').each_with_index.map do |element, i|
+      p i
+      icon_src = element.children.children.attribute('src')
+      if (i % slice_size).zero?
+        icon_src.value + ', ' + element.text.strip
+      else
+        element.text.strip
+      end
+    end
+
+    slicer(mapped_tables, slice_size)
+  end
+
   def traits_scraper(tables_index, slice_size)
     tables = tables_scraper('https://stellaris.paradoxwikis.com/Traits')
     table = tables[tables_index]
