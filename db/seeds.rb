@@ -8,6 +8,9 @@
 
 p 'purging database'
 
+Homeworld.destroy_all
+Empire.destroy_all
+Species.destroy_all
 Ethic.destroy_all
 Civic.destroy_all
 Trait.destroy_all

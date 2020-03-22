@@ -55,7 +55,7 @@ class StellarisWikiScraper
         nil
       elsif (i % slice_size).zero? && i < 67
         icon_src.value + ', ' + element.text.strip
-      elsif (i + 3 % slice_size).zero? && i > 84
+      elsif ((i - 3) % slice_size).zero? && i > 84
         icon_src.value + ', ' + element.text.strip
       else
         element.text.strip
@@ -86,7 +86,8 @@ class StellarisWikiScraper
   def ethics_content_mapper(ind, element, mapped_headlines, slice_size)
     last_gestalt_index = 67
     headline = mapped_headlines[ind / (slice_size * 4)]
-    icon_src = element.children.children.children.attribute('src')
+    child = ind == 64 ? element.children.children : element.children.children.children
+    icon_src = child.attribute('src')
 
     if ind > last_gestalt_index
       nil

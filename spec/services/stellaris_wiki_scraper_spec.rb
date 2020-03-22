@@ -46,6 +46,10 @@ RSpec.describe StellarisWikiScraper do
       result = ["/images/e/e6/Origins_gateway.png, Galactic Doorstep", "None", "Start with a dormant Gateway in which will brings the following in the first years:\n100-1500  Alloys and/or  Minerals\nA small space amoeba\nA special project that creates the From Gateway Sent Archaeological Site\n If the Gateway is reactivated it unlocks the Gateway Construction technology", "", ""]
       expect(origins_array.first).to eq(result)
     end
+    it 'scrapes Void Dwellers' do
+      result = ["/images/c/c3/Origin_void_dwellers.png, Void Dwellers", "Start on a habitat built over a Research deposit with an Arcane Replicator Planetary Feature Start on a habitat built over a Mining deposit Start on a habitat built over an Energy deposit", "Main species has Habitat Preference Main species has the Void Dweller trait Main species has -60% Pop Growth Speed on other celestial bodies Start with the Orbital Habitats technology researched Hydroponic farms have +1 Farmer Jobs Cannot change the starting system", "Gestalt Consciousness Agrarian Idyll", ""]
+      expect(origins_array.last).to eq(result)
+    end
   end
 
   context 'Traits' do
