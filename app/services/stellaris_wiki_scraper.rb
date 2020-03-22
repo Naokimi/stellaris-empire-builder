@@ -50,16 +50,19 @@ class StellarisWikiScraper
     slice_size = 5
 
     mapped_tables = table.search('td').each_with_index.map do |element, i|
-      p i
       icon_src = element.children.children.attribute('src')
-      if (i % slice_size).zero?
+      if (67..84).to_a.include?(i)
+        nil
+      elsif (i % slice_size).zero? && i < 67
+        icon_src.value + ', ' + element.text.strip
+      elsif (i + 3 % slice_size).zero? && i > 84
         icon_src.value + ', ' + element.text.strip
       else
         element.text.strip
       end
     end
 
-    slicer(mapped_tables, slice_size)
+    slicer(mapped_tables.compact, slice_size)
   end
 
   def traits_scraper(tables_index, slice_size)
