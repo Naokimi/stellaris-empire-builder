@@ -62,7 +62,7 @@ RSpec.describe SeedPopulator do
       expect(government[:authority]).to eq('Democratic')
     end
     it 'reads correctly the icon' do
-      expect(government[:icon]).to eq('https://stellaris.paradoxwikis.com/images/e/e6/Origins_gateway.png')
+      expect(government[:icon]).to eq('https://stellaris.paradoxwikis.com/images/a/a8/Auth_democratic.png')
     end
     it 'reads correctly the description' do
       expect(government[:description]).to eq('Democratic governments have regular elections where all citizens can vote on who should represent them.')
@@ -74,10 +74,10 @@ RSpec.describe SeedPopulator do
       expect(origin[:name]).to eq('Galactic Doorstep')
     end
     it 'reads correctly the image' do
-      expect(origin[:image]).to eq('https://stellaris.paradoxwikis.com/images/a/a8/Auth_democratic.png')
+      expect(origin[:image]).to eq('https://stellaris.paradoxwikis.com/images/e/e6/Origins_gateway.png')
     end
     it 'reads correctly the effects' do
-      expect(origin[:effects]).to eq('Start with a dormant Gateway in which will brings the following in the first years:\n100-1500  Alloys and/or  Minerals\nA small space amoeba\nA special project that creates the From Gateway Sent Archaeological Site\n If the Gateway is reactivated it unlocks the Gateway Construction technology')
+      expect(origin[:effects]).to eq("Start with a dormant Gateway in which will brings the following in the first years:\n100-1500  Alloys and/or  Minerals\nA small space amoeba\nA special project that creates the From Gateway Sent Archaeological Site\n If the Gateway is reactivated it unlocks the Gateway Construction technology")
     end
   end
 
