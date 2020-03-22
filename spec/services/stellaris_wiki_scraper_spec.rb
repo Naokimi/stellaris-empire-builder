@@ -41,6 +41,13 @@ RSpec.describe StellarisWikiScraper do
     end
   end
 
+  context 'Origins' do
+    it 'scrapes Galactic Doorstep' do
+      result = ["/images/e/e6/Origins_gateway.png, Galactic Doorstep", "None", "Start with a dormant Gateway in which will brings the following in the first years:\n100-1500  Alloys and/or  Minerals\nA small space amoeba\nA special project that creates the From Gateway Sent Archaeological Site\n If the Gateway is reactivated it unlocks the Gateway Construction technology", "", ""]
+      expect(origins_array.first).to eq(result)
+    end
+  end
+
   context 'Traits' do
     it 'scrapes standard and biological' do
       result = ["/images/1/10/Adaptive.png, Adaptive", "Habitability +10%", "Extremely Adaptive\n Nonadaptive\n Robust", "x", "2", "+50", "This species is highly adaptive when it comes to foreign environments."]

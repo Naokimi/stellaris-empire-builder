@@ -12,6 +12,9 @@ RSpec.shared_context 'scraped arrays' do
   let(:governments_array) { StellarisWikiScraper.new.governments_scraper }
   let(:government) { SeedPopulator.new([]).government_reader(governments_array.first) }
 
+  let(:origins_array) { StellarisWikiScraper.new.origins_scraper }
+  let(:origin) { SeedPopulator.new([]).origin_reader(origins_array.first) }
+
   let(:standard_traits_array) { StellarisWikiScraper.new.traits_scraper(0, 7) }
   let(:lithoid_traits_array) { StellarisWikiScraper.new.traits_scraper(1, 6) }
   let(:robotic_traits_array) { StellarisWikiScraper.new.traits_scraper(-1, 8) }
