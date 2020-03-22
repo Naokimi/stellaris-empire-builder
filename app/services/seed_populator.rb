@@ -68,6 +68,23 @@ class SeedPopulator
     }
   end
 
+  def origins_creator
+    @scraped_array.each do |origin|
+      Origin.create!(origin_reader(origin))
+    end
+  end
+
+  def origin_reader(origin)
+    # => ["/images/e/e6/Origins_gateway.png, Galactic Doorstep", "None", "Start with a dormant Gateway in which will brings the following in the first years:\n100-1500  Alloys and/or  Minerals\nA small space amoeba\nA special project that creates the From Gateway Sent Archaeological Site\n If the Gateway is reactivated it unlocks the Gateway Construction technology", "", ""]
+    homeworld_effects = origin.second == 'None' ? '' : origin.second
+    empire_effects = origin.third == 'None' ? '' : origin.third
+    {
+      name: origin.first.split(', ').second,
+      image: WIKI_URL + origin.first.split(', ').first,
+      effects: (homeworld_effects + ' ' + empire_effects).strip
+    }
+  end
+
   def traits_creator
     @scraped_array.each do |trait|
       if @group == 'lithoid'
