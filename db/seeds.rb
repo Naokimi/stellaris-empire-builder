@@ -26,17 +26,17 @@ SeedPopulator.new(civics_array, 'standard').civics_creator
 
 p 'creating Corporate civics'
 
-civics_array = StellarisWikiScraper.new.civics_scraper(2, 4)
+civics_array = StellarisWikiScraper.new.civics_scraper(1, 4)
 SeedPopulator.new(civics_array, 'corporate').civics_creator
 
 p 'creating Hive Mind civics'
 
-civics_array = StellarisWikiScraper.new.civics_scraper(3, 4)
+civics_array = StellarisWikiScraper.new.civics_scraper(2, 4)
 SeedPopulator.new(civics_array, 'hive').civics_creator
 
 p 'creating Machine Intelligence civics'
 
-civics_array = StellarisWikiScraper.new.civics_scraper(4, 4)
+civics_array = StellarisWikiScraper.new.civics_scraper(3, 4)
 SeedPopulator.new(civics_array, 'machine').civics_creator
 
 p 'creating standard and biological traits'
