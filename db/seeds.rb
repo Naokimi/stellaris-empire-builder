@@ -11,6 +11,7 @@ p 'purging database'
 Ethic.destroy_all
 Civic.destroy_all
 Trait.destroy_all
+Origin.destroy_all
 Government.destroy_all
 
 p 'creating ethics'
@@ -67,5 +68,10 @@ p 'creating governments'
 
 governments_array = StellarisWikiScraper.new.governments_scraper
 SeedPopulator.new(governments_array).governments_creator
+
+p 'creating origins'
+
+origins_array = StellarisWikiScraper.new.origins_scraper
+SeedPopulator.new(origins_array).origins_creator
 
 p 'database population completed'
