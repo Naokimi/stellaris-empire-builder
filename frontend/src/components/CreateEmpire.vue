@@ -1,19 +1,29 @@
 <template>
   <div>
     <p>I want to display all governments</p>
-    <ul>
-      <li v-for="g in governments" :key="g.id">{{ g.name }}</li>
+    <ul v-if="governments" v-for="government in governments" :key="government.id">
+      <li>{{ government.authority }}</li>
     </ul>
   </div>
 </template>
 
 <script>
-  // import GovernmentsList from './Governments/List'
+  import gql from 'graphql-tag'
 
   export default {
-    async beforeMount() {
-      const response = await this.getGovernments();
-      this.governments = response.data.governments;
-    }
+    data: {
+      governments: []
+    },
+    apollo: {
+      governments: gql`query {
+        governments {
+          authority
+        }
+      }`,
+      update(data) {
+        console.log(data)
+        return data
+      }
+    },
   }
 </script>
