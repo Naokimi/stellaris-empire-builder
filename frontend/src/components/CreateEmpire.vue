@@ -20,7 +20,7 @@
           authority
         }
       }`,
-      update(data) {
+      update: data => {
         console.log(data)
         return data
       }
